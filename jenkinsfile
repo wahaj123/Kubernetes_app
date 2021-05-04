@@ -12,14 +12,27 @@ pipeline {
                 credentialsId: 'wahaj123', 
                 url: 'https://github.com/wahaj123/Kubernetes_app.git'
             }
-        } 
+        }
+
+        stage('Liniting Dockerfile') {
+            steps {
+                sh 'docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yaml hadolint/hadolint < Dockerfile'
+            }
+        }
+
         stage('Building our image') { 
             steps { 
-                sh 'cd python'
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }           
+            }
+        }
+        stage ('Docker Scan'){
+            steps{
+                script{
+                    sh 'trivy image $registry:$BUILD_NUMBER'
                 }
-            } 
+            }
         }
         stage('Deploy our image') { 
             steps { 
@@ -29,7 +42,12 @@ pipeline {
                     }
                 } 
             }
-        } 
+        }
+        stage('Cleaning up') { 
+            steps { 
+                sh "cd python && kustomize edit set image $registry:$BUILD_NUMBER" 
+            }
+        }  
         stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
