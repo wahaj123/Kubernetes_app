@@ -4,4 +4,4 @@ images:
 - name: wahaj123/python
   newTag: "v1"
 resources:
-- deployment.yaml
+- deployment-web.yaml
