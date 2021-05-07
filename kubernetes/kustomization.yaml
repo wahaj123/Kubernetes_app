@@ -5,3 +5,4 @@ images:
   newTag: "v1"
 resources:
 - deployment-web.yaml
+- deployment-db.yaml
