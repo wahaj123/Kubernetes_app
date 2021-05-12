@@ -16,15 +16,15 @@ pipeline {
             }
         }
 
-        // stage('Cloning Kubernetes Repo') { 
-        //     steps { 
-        //         dir("kubernetes") { 
-        //             git branch: 'main', 
-        //             credentialsId: 'github_ssh', 
-        //             url: 'git@github.com:wahaj123/Kubernetes_app.git'
-        //         }
-        //     }
-        // }
+        stage('Cloning Kubernetes Repo') { 
+            steps { 
+                dir("kubernetes") { 
+                    git branch: 'main', 
+                    credentialsId: 'github_ssh', 
+                    url: 'git@github.com:wahaj123/Kubernetes_app.git'
+                }
+            }
+        }
 
         stage('Liniting Dockerfile') {
             steps {
@@ -33,42 +33,46 @@ pipeline {
         }
 
         stage('Building our image') { 
-            steps { 
+            steps {
                 script {
-                    sh 'ls' 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    dockerImage = docker.build (registry + ":$BUILD_NUMBER", "./code") 
                 }           
             }
         }
-        // stage ('Docker Scan'){
-        //     steps{
-        //         script{
-        //             sh 'trivy image $registry:$BUILD_NUMBER'
-        //         }
-        //     }
-        // }
-        // stage('Deploy our image') { 
-        //     steps { 
-        //         script { 
-        //             docker.withRegistry( '', registryCredential ) { 
-        //                 dockerImage.push() 
-        //             }
-        //         } 
-        //     }
-        // }
-        // stage('Changing tag') { 
-        //     steps { 
-        //         sh "cd python && kustomize edit set image $registry:$BUILD_NUMBER" 
-        //     }
-        // }
-        // stage('Pushing to Github') { 
-        //     steps { 
-        //         sshagent(['github_ssh']) {
-        //             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
-        //             sh "git push"
-        //         }
-        //     }
-        // }  
+        
+        stage ('Docker Scan'){
+            steps{
+                script{
+                    sh 'trivy image $registry:$BUILD_NUMBER'
+                }
+            }
+        }
+
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        }
+
+        stage('Changing tag') { 
+            steps { 
+                sh "cd kubernetes/kubernetes && kustomize edit set image $registry:$BUILD_NUMBER" 
+            }
+        }
+
+        stage('Pushing to Github') { 
+            steps { 
+                sshagent(['github_ssh']) {
+                    sh "cd kubernetes && git commit -am 'Publish new version' && git push || echo 'no changes'"
+                    sh "cd kubernetes && git push"
+                }
+            }
+        }
+
         stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
