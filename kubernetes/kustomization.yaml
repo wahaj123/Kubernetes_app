@@ -6,3 +6,6 @@ images:
 resources:
 - deployment-web.yaml
 - deployment-db.yaml
+- persistentvolumeclaim.yaml
+- service-db.yaml
+- service-web.yaml
