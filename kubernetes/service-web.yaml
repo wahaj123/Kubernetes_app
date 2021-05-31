@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: web
-  type: NodePort
+  type: LoadBalancer
   ports:
     - nodePort: 30010
       port: 5000
