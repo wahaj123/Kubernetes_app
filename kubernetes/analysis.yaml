@@ -16,4 +16,4 @@ spec:
       prometheus:
         address: http://100.25.179.103:9090
         query: |
-          sum(kube_pod_container_status_restarts_total{namespace="default", container="web"} offset 2m)
+          sum(kube_pod_container_status_restarts_total{namespace="default",pod="web"} offset 2m)
