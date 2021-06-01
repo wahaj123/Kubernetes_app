@@ -5,8 +5,8 @@ images:
   newTag: "28"
 resources:
 - deployment-web.yaml
-- deployment-db.yaml
-- persistentvolumeclaim.yaml
-- service-db.yaml
+# - deployment-db.yaml
+# - persistentvolumeclaim.yaml
+# - service-db.yaml
 - service-web.yaml
 # - analysis.yaml
