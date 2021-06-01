@@ -9,4 +9,4 @@ resources:
 - persistentvolumeclaim.yaml
 - service-db.yaml
 - service-web.yaml
-# - analysis.yaml
+- analysis.yaml
