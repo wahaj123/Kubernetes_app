@@ -30,8 +30,8 @@ spec:
     - name: primary
       route:
         - destination:
-            host: demo
+            host: web-service
           weight: 100
         - destination:
-            host: demo-canary
+            host: web-test
           weight: 0
