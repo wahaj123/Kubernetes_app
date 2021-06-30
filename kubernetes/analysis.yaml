@@ -16,4 +16,9 @@ spec:
       prometheus:
         address: http://100.25.179.103:9090
         query: |
-          kube_pod_container_status_restarts_total{namespace="default",clusterID="cluster3",container="web"} offset 2m
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[1m]
+          )) / 
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[1m]
+          ))

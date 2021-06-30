@@ -37,6 +37,14 @@ spec:
           value: web-service.default.svc.cluster.local
       # maxSurge: "25%"
       # maxUnavailable: 0
+      canaryService: demo-canary
+      stableService: demo
+      trafficRouting:
+        istio:
+           virtualService: 
+            name: istio-vs
+            routes:
+            - primary 
       steps:
       - setWeight: 25
       - pause:
