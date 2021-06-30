@@ -46,9 +46,9 @@ spec:
             routes:
             - primary 
       steps:
-      - setWeight: 25
+      - setWeight: 10
       - pause:
           duration: 2m # 10 seconds
-      - setWeight: 50
+      - setWeight: 30
       - pause: {} # pause indefinitely
       # canaryService: web-service
