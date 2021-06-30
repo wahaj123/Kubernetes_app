@@ -16,8 +16,8 @@ kind: Service
 metadata:
   name: web-test
 spec:
-  selector:
-    app: web
+  # selector:
+  #   app: web
   type: LoadBalancer
   ports:
     - nodePort: 30015
