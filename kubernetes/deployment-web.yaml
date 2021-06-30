@@ -51,4 +51,4 @@ spec:
           duration: 2m # 10 seconds
       - setWeight: 50
       - pause: {} # pause indefinitely
-      canaryService: web-service
+      # canaryService: web-service
