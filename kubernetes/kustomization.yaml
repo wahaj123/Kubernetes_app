@@ -12,3 +12,4 @@ resources:
 - service-db.yaml
 - service-web.yaml
 - analysis.yaml
+- istio.yaml
