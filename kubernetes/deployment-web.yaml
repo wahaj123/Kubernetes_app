@@ -37,8 +37,8 @@ spec:
           value: web-service.default.svc.cluster.local
       # maxSurge: "25%"
       # maxUnavailable: 0
-      canaryService: web-service
-      # stableService: web-service
+      canaryService: web-test
+      stableService: web-service
       trafficRouting:
         istio:
            virtualService: 
