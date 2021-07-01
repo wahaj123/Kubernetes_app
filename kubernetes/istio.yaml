@@ -16,7 +16,7 @@ spec:
     - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+kind: VirtualServiceA
 metadata:
   name: istio-vs
   labels:
@@ -31,7 +31,7 @@ spec:
       route:
         - destination:
             host: web-service
-          weight: 100
+          weight: 50
         - destination:
-            host: web-service
-          weight: 0
+            host: web-test
+          weight: 50
