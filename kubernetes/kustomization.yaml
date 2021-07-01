@@ -11,5 +11,5 @@ resources:
 - persistentvolumeclaim.yaml
 - service-db.yaml
 - service-web.yaml
-# - analysis.yaml
-# - istio.yaml
+- analysis.yaml
+- istio.yaml
