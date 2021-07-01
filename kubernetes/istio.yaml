@@ -31,7 +31,7 @@ spec:
       route:
         - destination:
             host: web-service
-          weight: 80
+          weight: 50
         - destination:
             host: web-test
-          weight: 20
+          weight: 50
