@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Deployment
+kind: Rollout
 metadata:
   name: web
 spec:
@@ -24,31 +24,31 @@ spec:
           image: 947743271187.dkr.ecr.us-east-2.amazonaws.com/flask_app:latest
           ports:
           - containerPort: 5000
-  # minReadySeconds: 30
-  # revisionHistoryLimit: 2
-  # strategy:
-  #   canary: #Indicates that the rollout should use the Canary strategy
-  #     analysis:
-  #       templates:
-  #       - templateName: success-rate
-  #       startingStep: 2 # delay starting analysis run until setWeight: 40%
-  #       args:
-  #       - name: service-name
-  #         value: web-service.default.svc.cluster.local
-  #     # maxSurge: "25%"
-  #     # maxUnavailable: 0
-  #     canaryService: web-test
-  #     stableService: web-service
-  #     trafficRouting:
-  #       istio:
-  #          virtualService: 
-  #           name: istio-vs
-  #           routes:
-  #           - primary 
-  #     steps:
-  #     - setWeight: 25
-  #     - pause:
-  #         duration: 2m # 10 seconds
-  #     - setWeight: 50
-  #     - pause: {} # pause indefinitely
-  #     # canaryService: web-service
+  minReadySeconds: 30
+  revisionHistoryLimit: 2
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      analysis:
+        templates:
+        - templateName: success-rate
+        startingStep: 2 # delay starting analysis run until setWeight: 40%
+        args:
+        - name: service-name
+          value: web-service.default.svc.cluster.local
+      # maxSurge: "25%"
+      # maxUnavailable: 0
+      canaryService: web-test
+      stableService: web-service
+      trafficRouting:
+        istio:
+           virtualService: 
+            name: istio-vs
+            routes:
+            - primary 
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 2m # 10 seconds
+      - setWeight: 50
+      - pause: {} # pause indefinitely
+      # canaryService: web-service
