@@ -28,13 +28,13 @@ spec:
   revisionHistoryLimit: 1
   strategy:
     canary: #Indicates that the rollout should use the Canary strategy
-      analysis:
-        templates:
-        - templateName: success-rate
-        startingStep: 2 # delay starting analysis run until setWeight: 40%
-        args:
-        - name: service-name
-          value: web-service.default.svc.cluster.local
+      # analysis:
+      #   templates:
+      #   - templateName: success-rate
+      #   startingStep: 2 # delay starting analysis run until setWeight: 40%
+      #   args:
+      #   - name: service-name
+      #     value: web-service.default.svc.cluster.local
       # maxSurge: "25%"
       # maxUnavailable: 0
       canaryService: web-test
