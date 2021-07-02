@@ -25,7 +25,7 @@ spec:
           ports:
           - containerPort: 5000
   minReadySeconds: 30
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   strategy:
     canary: #Indicates that the rollout should use the Canary strategy
       analysis:
