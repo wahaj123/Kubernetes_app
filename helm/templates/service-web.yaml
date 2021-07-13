@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
+  name: {{.Values.webservice.name}}
 spec:
   selector:
-    app: web
-  type: LoadBalancer
+    app: {{.Values.webdeployment.name}}
+  type: {{.Values.webservice.type}}
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: {{.Values.webservice.port}}
+      targetPort: {{.Values.webservice.targetPort}}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-test
+  name: {{.Values.webservice.name2}}
 spec:
   selector:
-    app: web
-  type: LoadBalancer
+    app: {{.Values.webdeployment.name}}
+  type: {{.Values.webservice.type2}}
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: {{.Values.webservice.port}}
+      targetPort: {{.Values.webservice.targetPort}}
