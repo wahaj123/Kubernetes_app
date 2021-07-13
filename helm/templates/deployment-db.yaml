@@ -21,9 +21,7 @@ spec:
           env: {{.Values.dbdeployment.containers.env}}
           ports:
             - containerPort: {{.Values.dbdeployment.containerPort}}
-          volumeMounts:
-            - name: {{.Values.dbdeployment.volumeMounts.name}}
-              mountPath: {{.Values.dbdeployment.volumeMounts.mountPath}}
+          volumeMounts: {{.Values.dbdeployment.volumeMounts}}
       volumes:
         - name: {{.Values.dbdeployment.volumes.name}}
           persistentVolumeClaim:
