@@ -28,5 +28,11 @@ spec:
               value: root
           ports:
             - containerPort: {{.Values.dbdeployment.containerPort}}
-          volumeMounts: {{.Values.dbdeployment.volumeMounts}}
-      volumes: {{.Values.dbdeployment.volumes}}
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: db-data
+
