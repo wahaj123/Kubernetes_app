@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: {{.Values.webdeployment.name}}
 spec:
-  replicas: 4
+  replicas: {{.Values.webdeployment.replicas}}
   selector:
     matchLabels:
       app: {{.Values.webdeployment.name}}
