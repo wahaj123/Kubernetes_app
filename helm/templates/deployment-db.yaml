@@ -22,7 +22,4 @@ spec:
           ports:
             - containerPort: {{.Values.dbdeployment.containerPort}}
           volumeMounts: {{.Values.dbdeployment.volumeMounts}}
-      volumes:
-        - name: {{.Values.dbdeployment.volumes.name}}
-          persistentVolumeClaim:
-            claimName: {{.Values.dbdeployment.volumes.persistentVolumeClaim}}
+      volumes: {{.Values.dbdeployment.volumes}}
