@@ -42,3 +42,18 @@ pvc:
   name: db-data
   accessModes: ReadWriteOnce
   storage: 100Mi
+
+istiovs:
+  name: istio-vs
+  hosts: "*"
+  weight1: 80
+  weight2: 20
+
+istiogw:
+  name: istio-gateway
+  istio: ingressgateway
+  port:
+    number: 80
+    name: http
+    protocol: HTTP
+  hosts: "*"

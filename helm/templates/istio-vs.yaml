@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{.Values.istiovs.name}}
+  labels:
+    app: {{.Values.istiovs.name}}
+spec:
+  hosts: [{{.Values.istiovs.hosts}}]
+  gateways: [{{.Values.istiogw.name}}]
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: web-service
+          weight: 80
+        - destination:
+            host: web-test
+          weight: 20
