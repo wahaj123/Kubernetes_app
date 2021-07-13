@@ -17,8 +17,15 @@ spec:
       containers:
         - image: {{.Values.dbdeployment.image}}
           name: {{.Values.dbdeployment.name}}
-          args: {{.Values.dbdeployment.containers.args}}
-          env: {{.Values.dbdeployment.containers.env}}
+          args:
+            - --default_authentication_plugin=mysql_native_password
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
+          env: 
+            - name: MYSQL_DATABASE
+              value: flaskshop
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
           ports:
             - containerPort: {{.Values.dbdeployment.containerPort}}
           volumeMounts: {{.Values.dbdeployment.volumeMounts}}
