@@ -20,12 +20,12 @@ dbdeployment:
         - name: MYSQL_ROOT_PASSWORD
           value: root
     containerPort: 3306
-    volumeMounts:
-      - name: db-data
-        mountPath: /var/lib/mysql
-    volumes:
-      - name: db-data
-        persistentVolumeClaim: db-data
+    # volumeMounts:
+    #   - name: db-data
+    #     mountPath: /var/lib/mysql
+    # volumes:
+    #   - name: db-data
+    #     persistentVolumeClaim: db-data
 webdeployment:
   name: web
   replicas: 4
@@ -38,3 +38,7 @@ webservice:
   targetPort: 5000
   name2: web-test
   type2: LoadBalancer
+pvc:
+  name: db-data
+  accessModes: ReadWriteOnce
+  storage: 100Mi
