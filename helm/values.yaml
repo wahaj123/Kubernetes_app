@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 
-db-deployment:
+dbdeployment:
     name: db
     replicas: 1
     image: mysql:8.0

@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.db-deployment.name}}
+  name: {{.Values.dbdeployment.name}}
   labels:
-    app: {{.Values.db-deployment.name}}
+    app: {{.Values.dbdeployment.name}}
 spec:
-  replicas: {{.Values.db-deployment.replicas}}
+  replicas: {{.Values.dbdeployment.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.db-deployment.name}}
+      app: {{.Values.dbdeployment.name}}
   template:
     metadata:
       labels:
-        app: {{.Values.db-deployment.name}}
+        app: {{.Values.dbdeployment.name}}
     spec:
       containers:
-        - image: {{.Values.db-deployment.image}}
-          name: {{.Values.db-deployment.name}}
-          args: {{.Values.db-deployment.containers.args}}
-          env: {{.Values.db-deployment.containers.env}}
+        - image: {{.Values.dbdeployment.image}}
+          name: {{.Values.dbdeployment.name}}
+          args: {{.Values.dbdeployment.containers.args}}
+          env: {{.Values.dbdeployment.containers.env}}
           ports:
-            - containerPort: {{.Values.db-deployment.containerPort}}
+            - containerPort: {{.Values.dbdeployment.containerPort}}
           volumeMounts:
-            - name: {{.Values.db-deployment.volumeMounts.name}}
-              mountPath: {{.Values.db-deployment.volumeMounts.mountPath}}
+            - name: {{.Values.dbdeployment.volumeMounts.name}}
+              mountPath: {{.Values.dbdeployment.volumeMounts.mountPath}}
       volumes:
-        - name: {{.Values.db-deployment.volumes.name}}
+        - name: {{.Values.dbdeployment.volumes.name}}
           persistentVolumeClaim:
-            claimName: {{.Values.db-deployment.volumes.persistentVolumeClaim}}
+            claimName: {{.Values.dbdeployment.volumes.persistentVolumeClaim}}
