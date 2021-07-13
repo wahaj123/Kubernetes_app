@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: {{.Values.dbdeployment.name}}
   labels:
-    app: db
+    app: {{.Values.dbdeployment.name}}
 spec:
-  type: ClusterIP
+  type: {{.Values.dbservice.type}}
   ports:
-    - port: 3306
+    - port: {{.Values.dbservice.port}}
   selector:
-    app: db
+    app: {{.Values.dbdeployment.name}}
