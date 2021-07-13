@@ -12,4 +12,5 @@ spec:
       number: {{.Values.istiogw.port.number}}
       name: {{.Values.istiogw.port.name}}
       protocol: {{.Values.istiogw.port.protocol}}
-    hosts: [{{.Values.istiogw.host}}]
+    hosts: 
+      - "*"
