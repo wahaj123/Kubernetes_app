@@ -15,5 +15,5 @@ spec:
             host: {{.Values.webservice.name}}
           weight: {{.Values.istiovs.weight}}
         - destination:
-            host: {{.Values.istiovs.weight2}}
-          weight: 20
+            host: {{.Values.webservice.name2}}
+          weight: {{.Values.istiovs.weight2}}
