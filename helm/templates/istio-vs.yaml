@@ -5,7 +5,8 @@ metadata:
   labels:
     app: {{.Values.istiovs.name}}
 spec:
-  hosts: [{{.Values.istiovs.hosts}}]
+  hosts: 
+    - "*"
   gateways: [{{.Values.istiogw.name}}]
   http:
     - name: primary
