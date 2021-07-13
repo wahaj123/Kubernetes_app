@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: web
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - env:
+            - name: DB_URI
+              value: mysql+pymysql://root:root@db:3306/flaskshop?charset=utf8mb4
+            # - name: ESEARCH_URI
+            #   value: esearch
+            # - name: REDIS_URI
+            #   value: redis://redis:6379
+          name: web
+          image: 947743271187.dkr.ecr.us-east-2.amazonaws.com/flask_app:latest
+          ports:
+          - containerPort: 5000
+  minReadySeconds: 30
+  revisionHistoryLimit: 1
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      # analysis:
+      #   templates:
+      #   - templateName: success-rate
+      #   startingStep: 2 # delay starting analysis run until setWeight: 40%
+      #   args:
+      #   - name: service-name
+      #     value: web-service.default.svc.cluster.local
+      # maxSurge: "25%"
+      # maxUnavailable: 0
+      canaryService: web-test
+      stableService: web-service
+      trafficRouting:
+        istio:
+           virtualService: 
+            name: istio-vs
+            routes:
+            - primary 
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 1m # 10 seconds
+      - setWeight: 50
+      - pause: {} # pause indefinitely
+      # canaryService: web-service
