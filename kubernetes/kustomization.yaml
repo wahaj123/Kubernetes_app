@@ -4,10 +4,10 @@ images:
 - name: 947743271187.dkr.ecr.us-east-2.amazonaws.com/flask_app
   newTag: "85"
 resources:
-- deployment-web.yaml
+# - deployment-web.yaml
 - deployment-db.yaml
 - persistentvolumeclaim.yaml
 - service-db.yaml
-- service-web.yaml
+# - service-web.yaml
 - analysis.yaml
 # - istio.yaml
