@@ -39,12 +39,12 @@ spec:
       # maxUnavailable: 0
       canaryService: web-test
       stableService: web-service
-      trafficRouting:
-        istio:
-           virtualService: 
-            name: istio-vs
-            routes:
-            - primary 
+      # trafficRouting:
+      #   istio:
+      #      virtualService: 
+      #       name: istio-vs
+      #       routes:
+      #       - primary 
       steps:
       - setWeight: 25
       - pause:
