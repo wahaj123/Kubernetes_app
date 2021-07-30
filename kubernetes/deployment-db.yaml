@@ -15,7 +15,7 @@ spec:
         app: db
     spec:
       containers:
-        - image: mysql:8.0
+        - image: 947743271187.dkr.ecr.us-east-1.amazonaws.com/mysql
           name: db
           args:
             - --default_authentication_plugin=mysql_native_password
