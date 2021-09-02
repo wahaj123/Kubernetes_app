@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: 947743271187.dkr.ecr.us-east-2.amazonaws.com/flask_app
-  newTag: "88"
+  newTag: "90"
 resources:
 - deployment-web.yaml
 - deployment-db.yaml
