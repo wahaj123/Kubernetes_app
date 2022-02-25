@@ -22,4 +22,4 @@ data:
       username: wahaj
       password: wahaj
 
-type: Opaque
+# type: Opaque
