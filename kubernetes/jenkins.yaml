@@ -6,7 +6,7 @@ data:
   # trigger.on-deployed: |
   #   when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
   service.webhook.github: |
-    url: http://jenkins.cloudmanagement.me:8080/job/TFS-Repo-clone/build?token=tfs
+    url: http://3.140.197.108:8080/build?token=tfs123
     basicAuth:
       username: wahaj
       password: wahaj
