@@ -12,16 +12,31 @@
 #       password: wahaj
 #type: Opaque
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: jenkins-job-trigger
-data:
-  trigger.on-deployed: |
-    when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
-  service.webhook.jenkins: |
-    url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
-    basicAuth:
-      username: wahaj
-      password: wahaj
+  name: argocd-notifications-secret
+stringData:
+  notifiers.yaml: |
+    webhook:
+    - name: jenkins
+      url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
+      basicAuth:
+        username: wahaj
+        password: wahaj
 
-# type: Opaque
+type: Opaque
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: jenkins-job-trigger
+# data:
+#   trigger.on-deployed: |
+#     when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+#   service.webhook.jenkins: |
+#     url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
+#     basicAuth:
+#       username: wahaj
+#       password: wahaj
+
+# # type: Opaque
