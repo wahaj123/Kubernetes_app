@@ -25,6 +25,7 @@ stringData:
         password: wahaj
 
 type: Opaque
+---
 
 apiVersion: v1
 kind: ConfigMap
