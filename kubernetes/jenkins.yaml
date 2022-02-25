@@ -10,4 +10,4 @@ data:
     basicAuth:
       username: wahaj
       password: wahaj
-type: Opaque
+# type: Opaque
