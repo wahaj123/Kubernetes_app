@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
 data:
-  trigger.on-deployed: |
-    when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+  # trigger.on-deployed: |
+  #   when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
   service.webhook.github: |
     url: http://jenkins.cloudmanagement.me:8080/job/TFS-Repo-clone/build?token=tfs
     basicAuth:
