@@ -17,7 +17,7 @@ metadata:
   name: jenkins-job-trigger
 data:
   service.webhook.jenkins: |
-    url: http://3.140.197.108:8080/build?token=tfs123
+    url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
     basicAuth:
       username: wahaj
       password: wahaj
