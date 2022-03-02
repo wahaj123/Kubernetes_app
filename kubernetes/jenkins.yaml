@@ -20,18 +20,22 @@ metadata:
 data:
   config.yaml: |
     triggers:
-      - name: sync-operation-failed
-        condition: app.status.operationState.phase in ['Error', 'Failed']
-        template: sync-operation-status-change
-      - name: sync-operation-succeeded
-        condition: app.status.operationState.phase in ['Succeeded']
-        template: sync-operation-status-change
-      - name: sync-operation-running
-        condition: app.status.operationState.phase in ['Running']
-        template: sync-operation-status-change
+      - name: on-sync-succeeded
+        enabled: true
     templates:
     - name: jenkins
       webhook:
         jenkins:
           method: POST 
           path: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
+
+
+# - name: sync-operation-failed
+#         condition: app.status.operationState.phase in ['Error', 'Failed']
+#         template: sync-operation-status-change
+#       - name: sync-operation-succeeded
+#         condition: app.status.operationState.phase in ['Succeeded']
+#         template: sync-operation-status-change
+#       - name: sync-operation-running
+#         condition: app.status.operationState.phase in ['Running']
+#         template: sync-operation-status-change
