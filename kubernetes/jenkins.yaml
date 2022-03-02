@@ -34,3 +34,4 @@ data:
       webhook:
         jenkins:
           method: POST 
+          path: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
