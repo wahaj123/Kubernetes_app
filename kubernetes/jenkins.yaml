@@ -19,23 +19,6 @@ kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
 data:
- triggers:
-      - name: on-sync-succeeded
-        condition: app.status.operationState.phase == 'Succeeded' and app.status.health.status == 'Healthy'
-        enabled: true
-      - name: jenkins
-        condition: app.status.operationState.phase == 'Succeeded' and app.status.health.status == 'Healthy'
-        enabled: true
-        template: jenkins
-      - name: on-sync-failed
-        enabled: true
-      - name: on-sync-running
-        condition: app.status.health.status == 'Progressing'
-        enabled: true
-  subscriptions:
-  - recipients:
-    - webhook:jenkins
-    trigger: jenkins
   templates:
   - name: jenkins
     webhook:
