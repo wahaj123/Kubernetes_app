@@ -24,10 +24,3 @@ data:
       webhook:
         jenkins:
           method: POST 
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    recipients.argocd-notifications.argoproj.io: webhook:jenkins
-  name: web
