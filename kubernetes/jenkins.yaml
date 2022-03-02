@@ -1,39 +1,60 @@
-apiVersion: v1
-kind: Secret
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: argocd-notifications-secret
-stringData:
-  notifiers.yaml: |
-    webhook:
-    - name: jenkins
-      url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
-      basicAuth:
-        username: wahaj
-        password: wahaj
+  generateName: Jenkins-job-trigger-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: jenkins-job-trigger
+        image: curlimages/curl
+        command:
+          - "curl"
+          - "-I"
+          - "-u"
+          - "wahaj:wahaj"
+          - "http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123"
+      restartPolicy: Never
+  backoffLimit: 2
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: argocd-notifications-secret
+# stringData:
+#   notifiers.yaml: |
+#     webhook:
+#     - name: jenkins
+#       url: http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123
+#       basicAuth:
+#         username: wahaj
+#         password: wahaj
 
-type: Opaque
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-notifications-cm
-data:
-  config.yaml: |
-    triggers:
-      - name: on-sync-succeeded
-        enabled: true
-    templates:
-    - name: jenkins
-      webhook:
-        jenkins:
-          method: POST 
+# type: Opaque
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: argocd-notifications-cm
+# data:
+#   config.yaml: |
+#     triggers:
+#       - name: on-sync-succeeded
+#         enabled: true
+#     templates:
+#     - name: jenkins
+#       webhook:
+#         jenkins:
+#           method: POST 
 
-# - name: sync-operation-failed
-#         condition: app.status.operationState.phase in ['Error', 'Failed']
-#         template: sync-operation-status-change
-#       - name: sync-operation-succeeded
-#         condition: app.status.operationState.phase in ['Succeeded']
-#         template: sync-operation-status-change
-#       - name: sync-operation-running
-#         condition: app.status.operationState.phase in ['Running']
-#         template: sync-operation-status-change
+# # - name: sync-operation-failed
+# #         condition: app.status.operationState.phase in ['Error', 'Failed']
+# #         template: sync-operation-status-change
+# #       - name: sync-operation-succeeded
+# #         condition: app.status.operationState.phase in ['Succeeded']
+# #         template: sync-operation-status-change
+# #       - name: sync-operation-running
+# #         condition: app.status.operationState.phase in ['Running']
+# #         template: sync-operation-status-change

@@ -1,8 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  annotations:
-    recipients.argocd-notifications.argoproj.io: webhook:jenkins
   name: web
 spec:
   replicas: 4
