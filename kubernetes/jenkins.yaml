@@ -19,6 +19,16 @@ metadata:
   name: argocd-notifications-cm
 data:
   config.yaml: |
+    triggers:
+      - name: sync-operation-failed
+        condition: app.status.operationState.phase in ['Error', 'Failed']
+        template: sync-operation-status-change
+      - name: sync-operation-succeeded
+        condition: app.status.operationState.phase in ['Succeeded']
+        template: sync-operation-status-change
+      - name: sync-operation-running
+        condition: app.status.operationState.phase in ['Running']
+        template: sync-operation-status-change
     templates:
     - name: jenkins
       webhook:
