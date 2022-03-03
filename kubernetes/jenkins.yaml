@@ -1,21 +1,34 @@
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: jenkins-trigger
+#   annotations:
+#   #   argocd.argoproj.io/hook: PostSync
+#     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+# spec:
+#   template:
+#     spec:
+#       containers:
+#       - name: jenkins-job-trigger
+#         image: curlimages/curl
+#         command:
+#           - "curl"
+#           - "-I"
+#           - "-u"
+#           - "wahaj:wahaj"
+#           - "http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123"
+#       restartPolicy: Never
+#   backoffLimit: 2
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jenkins-trigger
-  annotations:
-  #   argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+  name: pi
 spec:
   template:
     spec:
       containers:
-      - name: jenkins-job-trigger
-        image: curlimages/curl
-        command:
-          - "curl"
-          - "-I"
-          - "-u"
-          - "wahaj:wahaj"
-          - "http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123"
+      - name: pi
+        image: perl
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
       restartPolicy: Never
-  backoffLimit: 2
+  backoffLimit: 4
