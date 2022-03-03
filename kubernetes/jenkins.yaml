@@ -11,12 +11,12 @@ spec:
       containers:
       - name: jenkins-job-trigger
         image: curlimages/curl
-        command:
-          - "curl"
-          - "-I"
-          - "-u"
-          - "wahaj:wahaj"
-          - "http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123"
+        # command:
+        #   - "curl"
+        #   - "-I"
+        #   - "-u"
+        #   - "wahaj:wahaj"
+        #   - "http://3.140.197.108:8080/job/TFS-Repo-clone/build?token=tfs123"
       restartPolicy: Never
   backoffLimit: 2
 
