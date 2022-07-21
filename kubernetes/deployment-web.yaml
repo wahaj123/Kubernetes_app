@@ -21,7 +21,7 @@ spec:
             # - name: REDIS_URI
             #   value: redis://redis:6379
           name: web
-          image: 947743271187.dkr.ecr.us-east-2.amazonaws.com/flask_app:latest
+          image: 191124798140.dkr.ecr.us-east-2.amazonaws.com/flask_app:lastest
           ports:
           - containerPort: 5000
   minReadySeconds: 30
