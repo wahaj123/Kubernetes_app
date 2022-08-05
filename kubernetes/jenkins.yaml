@@ -16,6 +16,6 @@ spec:
           - "-I"
           - "-u"
           - "wahaj:wahaj"
-          - "http://3.140.197.108:8080/job/load_testing/build?token=load_testing_123"
+          - "http://18.118.226.155:8080/job/load_testing/build?token=load_testing_123"
       restartPolicy: Never
   backoffLimit: 2
