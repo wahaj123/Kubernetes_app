@@ -11,7 +11,7 @@ pipeline {
                 dir("code") { 
                     git branch: 'main', 
                     credentialsId: 'github_ssh', 
-                    url: 'git@github.com:wahaj123/flask_kubernetes.git'
+                    url: 'git@github.com:wahaj123/Saelor-Application.git'
                 }
             }
         }
